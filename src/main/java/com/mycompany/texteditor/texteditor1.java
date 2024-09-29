@@ -6,8 +6,12 @@ package com.mycompany.texteditor;
 
 import com.mycompany.texteditor.customstuff.MBCustom;
 import com.mycompany.texteditor.customstuff.SBCustom;
+import java.awt.geom.RoundRectangle2D;
+import java.util.HashSet;
+import java.util.Set;
 import javax.swing.JFrame;
 import javax.swing.JScrollBar;
+import javax.swing.UIManager;
 
 /**
  *
@@ -26,7 +30,10 @@ public class texteditor1 extends javax.swing.JFrame {
         SBCustom sbH = new SBCustom();
         sbH.setOrientation(JScrollBar.HORIZONTAL);
         jScroll.setHorizontalScrollBar(sbH);
-}
+        this.setShape(new RoundRectangle2D.Double(0,0,getWidth(),getHeight(),20,20));
+        this.setResizable(true);
+        
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -75,6 +82,16 @@ public class texteditor1 extends javax.swing.JFrame {
         jToolBar1.setPreferredSize(new java.awt.Dimension(234, 18));
 
         mBCustom1.setDoubleBuffered(true);
+        mBCustom1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                mBCustom1MouseDragged(evt);
+            }
+        });
+        mBCustom1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                mBCustom1MousePressed(evt);
+            }
+        });
 
         jMenu4.setBackground(new java.awt.Color(153, 153, 153));
         jMenu4.setText("+");
@@ -161,6 +178,15 @@ public class texteditor1 extends javax.swing.JFrame {
     private void miFDelete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miFDelete1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_miFDelete1ActionPerformed
+
+    private void mBCustom1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mBCustom1MousePressed
+        x = evt.getX();
+        y = evt.getY();
+    }//GEN-LAST:event_mBCustom1MousePressed
+
+    private void mBCustom1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mBCustom1MouseDragged
+        setLocation(evt.getXOnScreen() - x, evt.getYOnScreen() - y);    
+    }//GEN-LAST:event_mBCustom1MouseDragged
 
     /**
      * @param args the command line arguments
