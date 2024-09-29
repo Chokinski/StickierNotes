@@ -4,7 +4,9 @@
  */
 package com.mycompany.texteditor;
 
-import com.mycompany.texteditor.scrollbar.SBCustom;
+import com.mycompany.texteditor.customstuff.MBCustom;
+import com.mycompany.texteditor.customstuff.SBCustom;
+import javax.swing.JFrame;
 import javax.swing.JScrollBar;
 
 /**
@@ -24,6 +26,8 @@ public class texteditor1 extends javax.swing.JFrame {
         SBCustom sbH = new SBCustom();
         sbH.setOrientation(JScrollBar.HORIZONTAL);
         jScroll.setHorizontalScrollBar(sbH);
+
+        
     }
 
     /**
@@ -35,24 +39,20 @@ public class texteditor1 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenu4 = new javax.swing.JMenu();
         jScroll = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu3 = new javax.swing.JMenu();
-        jMenu1 = new javax.swing.JMenu();
-        miFSave = new javax.swing.JMenuItem();
-        miFSaveAs = new javax.swing.JMenuItem();
-        miFOpen = new javax.swing.JMenuItem();
-        miFDelete = new javax.swing.JMenuItem();
+        jToolBar1 = new javax.swing.JToolBar();
+        mBCustom1 = new com.mycompany.texteditor.customstuff.MBCustom();
+        jMenu4 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
-
-        jMenu4.setText("jMenu4");
+        miFSave1 = new javax.swing.JMenuItem();
+        miFSaveAs1 = new javax.swing.JMenuItem();
+        miFOpen1 = new javax.swing.JMenuItem();
+        miFDelete1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("StickierNotes");
         setAlwaysOnTop(true);
-        setAutoRequestFocus(false);
         setBackground(new java.awt.Color(51, 51, 51));
         setForeground(java.awt.Color.black);
         setLocation(new java.awt.Point(50, 50));
@@ -64,113 +64,99 @@ public class texteditor1 extends javax.swing.JFrame {
         jScroll.setForeground(new java.awt.Color(255, 255, 255));
         jScroll.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
+        jTextArea1.setBackground(new java.awt.Color(102, 102, 102));
         jTextArea1.setColumns(20);
+        jTextArea1.setForeground(new java.awt.Color(255, 255, 255));
         jTextArea1.setRows(5);
         jScroll.setViewportView(jTextArea1);
 
-        jMenuBar1.setBackground(new java.awt.Color(153, 153, 153));
-        jMenuBar1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        jMenuBar1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                jMenuBar1MouseDragged(evt);
-            }
-        });
-        jMenuBar1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jMenuBar1MousePressed(evt);
-            }
-        });
+        jToolBar1.setRollover(true);
 
-        jMenu3.setText("+");
-        jMenuBar1.add(jMenu3);
+        mBCustom1.setDoubleBuffered(true);
 
-        jMenu1.setMnemonic('F');
-        jMenu1.setText("File");
+        jMenu4.setBackground(new java.awt.Color(153, 153, 153));
+        jMenu4.setText("+");
+        jMenu4.setToolTipText("");
+        jMenu4.setBorderPainted(false);
+        jMenu4.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
+        mBCustom1.add(jMenu4);
 
-        miFSave.setMnemonic('S');
-        miFSave.setText("Save");
-        miFSave.addActionListener(new java.awt.event.ActionListener() {
+        jMenu2.setMnemonic('F');
+        jMenu2.setText("File");
+
+        miFSave1.setMnemonic('S');
+        miFSave1.setText("Save");
+        miFSave1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miFSaveActionPerformed(evt);
+                miFSave1ActionPerformed(evt);
             }
         });
-        jMenu1.add(miFSave);
+        jMenu2.add(miFSave1);
 
-        miFSaveAs.setText("Save As");
-        miFSaveAs.addActionListener(new java.awt.event.ActionListener() {
+        miFSaveAs1.setText("Save As");
+        miFSaveAs1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miFSaveAsActionPerformed(evt);
+                miFSaveAs1ActionPerformed(evt);
             }
         });
-        jMenu1.add(miFSaveAs);
+        jMenu2.add(miFSaveAs1);
 
-        miFOpen.setMnemonic('O');
-        miFOpen.setText("Open");
-        miFOpen.addActionListener(new java.awt.event.ActionListener() {
+        miFOpen1.setMnemonic('O');
+        miFOpen1.setText("Open");
+        miFOpen1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miFOpenActionPerformed(evt);
+                miFOpen1ActionPerformed(evt);
             }
         });
-        jMenu1.add(miFOpen);
+        jMenu2.add(miFOpen1);
 
-        miFDelete.setMnemonic('D');
-        miFDelete.setText("Delete");
-        miFDelete.addActionListener(new java.awt.event.ActionListener() {
+        miFDelete1.setMnemonic('D');
+        miFDelete1.setText("Delete");
+        miFDelete1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miFDeleteActionPerformed(evt);
+                miFDelete1ActionPerformed(evt);
             }
         });
-        jMenu1.add(miFDelete);
+        jMenu2.add(miFDelete1);
 
-        jMenuBar1.add(jMenu1);
+        mBCustom1.add(jMenu2);
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
-
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(mBCustom1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+            .addComponent(jScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScroll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuBar1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuBar1MouseDragged
-
-setLocation(evt.getXOnScreen() - x, evt.getYOnScreen() - y);
-    }//GEN-LAST:event_jMenuBar1MouseDragged
-
-    private void jMenuBar1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuBar1MousePressed
-        
-        x = evt.getX();
-        y = evt.getY();
-        
-    }//GEN-LAST:event_jMenuBar1MousePressed
-
-    private void miFSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miFSaveActionPerformed
+    private void miFSave1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miFSave1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_miFSaveActionPerformed
+    }//GEN-LAST:event_miFSave1ActionPerformed
 
-    private void miFSaveAsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miFSaveAsActionPerformed
+    private void miFSaveAs1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miFSaveAs1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_miFSaveAsActionPerformed
+    }//GEN-LAST:event_miFSaveAs1ActionPerformed
 
-    private void miFOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miFOpenActionPerformed
+    private void miFOpen1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miFOpen1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_miFOpenActionPerformed
+    }//GEN-LAST:event_miFOpen1ActionPerformed
 
-    private void miFDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miFDeleteActionPerformed
+    private void miFDelete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miFDelete1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_miFDeleteActionPerformed
+    }//GEN-LAST:event_miFDelete1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -208,16 +194,15 @@ setLocation(evt.getXOnScreen() - x, evt.getYOnScreen() - y);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScroll;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JMenuItem miFDelete;
-    private javax.swing.JMenuItem miFOpen;
-    private javax.swing.JMenuItem miFSave;
-    private javax.swing.JMenuItem miFSaveAs;
+    private javax.swing.JToolBar jToolBar1;
+    private com.mycompany.texteditor.customstuff.MBCustom mBCustom1;
+    private javax.swing.JMenuItem miFDelete1;
+    private javax.swing.JMenuItem miFOpen1;
+    private javax.swing.JMenuItem miFSave1;
+    private javax.swing.JMenuItem miFSaveAs1;
     // End of variables declaration//GEN-END:variables
 }
