@@ -4,6 +4,9 @@
  */
 package com.mycompany.texteditor;
 
+import com.mycompany.texteditor.scrollbar.SBCustom;
+import javax.swing.JScrollBar;
+
 /**
  *
  * @author Luiz Macedo
@@ -17,6 +20,10 @@ public class texteditor1 extends javax.swing.JFrame {
     public texteditor1() {
         setUndecorated(true);
         initComponents();
+        jScroll.setVerticalScrollBar(new SBCustom());
+        SBCustom sbH = new SBCustom();
+        sbH.setOrientation(JScrollBar.HORIZONTAL);
+        jScroll.setHorizontalScrollBar(sbH);
     }
 
     /**
@@ -28,7 +35,8 @@ public class texteditor1 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
+        jMenu4 = new javax.swing.JMenu();
+        jScroll = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
@@ -39,19 +47,29 @@ public class texteditor1 extends javax.swing.JFrame {
         miFDelete = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
+        jMenu4.setText("jMenu4");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("StickierNotes");
+        setAlwaysOnTop(true);
+        setAutoRequestFocus(false);
+        setBackground(new java.awt.Color(51, 51, 51));
         setForeground(java.awt.Color.black);
         setLocation(new java.awt.Point(50, 50));
+        setUndecorated(true);
         setSize(new java.awt.Dimension(206, 211));
 
-        jScrollPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jScroll.setBackground(new java.awt.Color(0, 0, 0));
+        jScroll.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jScroll.setForeground(new java.awt.Color(255, 255, 255));
+        jScroll.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        jScroll.setViewportView(jTextArea1);
 
-        jMenuBar1.setBackground(new java.awt.Color(255, 153, 255));
-        jMenuBar1.setBorder(null);
+        jMenuBar1.setBackground(new java.awt.Color(153, 153, 153));
+        jMenuBar1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         jMenuBar1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 jMenuBar1MouseDragged(evt);
@@ -77,7 +95,6 @@ public class texteditor1 extends javax.swing.JFrame {
             }
         });
         jMenu1.add(miFSave);
-        miFSave.getAccessibleContext().setAccessibleName("Save");
 
         miFSaveAs.setText("Save As");
         miFSaveAs.addActionListener(new java.awt.event.ActionListener() {
@@ -116,11 +133,11 @@ public class texteditor1 extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+            .addComponent(jScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+            .addComponent(jScroll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
         );
 
         pack();
@@ -194,8 +211,9 @@ setLocation(evt.getXOnScreen() - x, evt.getYOnScreen() - y);
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScroll;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JMenuItem miFDelete;
     private javax.swing.JMenuItem miFOpen;
