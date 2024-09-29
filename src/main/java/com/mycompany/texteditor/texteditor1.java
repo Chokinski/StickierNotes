@@ -26,9 +26,7 @@ public class texteditor1 extends javax.swing.JFrame {
         SBCustom sbH = new SBCustom();
         sbH.setOrientation(JScrollBar.HORIZONTAL);
         jScroll.setHorizontalScrollBar(sbH);
-
-        
-    }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -70,7 +68,11 @@ public class texteditor1 extends javax.swing.JFrame {
         jTextArea1.setRows(5);
         jScroll.setViewportView(jTextArea1);
 
-        jToolBar1.setRollover(true);
+        jToolBar1.setFloatable(true);
+        jToolBar1.setMaximumSize(new java.awt.Dimension(100000, 10));
+        jToolBar1.setMinimumSize(new java.awt.Dimension(0, 0));
+        jToolBar1.setName(""); // NOI18N
+        jToolBar1.setPreferredSize(new java.awt.Dimension(234, 18));
 
         mBCustom1.setDoubleBuffered(true);
 
@@ -127,15 +129,17 @@ public class texteditor1 extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
+            .addComponent(jScroll)
             .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
