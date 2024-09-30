@@ -2,16 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.mycompany.texteditor;
+package com.group6.texteditor;
 
-import com.mycompany.texteditor.customstuff.MBCustom;
-import com.mycompany.texteditor.customstuff.SBCustom;
+import com.group6.texteditor.customstuff.*;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.geom.RoundRectangle2D;
-import java.util.HashSet;
-import java.util.Set;
+
 import javax.swing.JFrame;
 import javax.swing.JScrollBar;
 import javax.swing.UIManager;
+import javax.swing.border.LineBorder;
+
 
 /**
  *
@@ -20,18 +22,20 @@ import javax.swing.UIManager;
 public class texteditor1 extends javax.swing.JFrame {
     public int x;
     public int y;
+    
     /**
      * Creates new form texteditor1
      */
     public texteditor1() {
-        setUndecorated(true);
+
         initComponents();
         jScroll.setVerticalScrollBar(new SBCustom());
         SBCustom sbH = new SBCustom();
         sbH.setOrientation(JScrollBar.HORIZONTAL);
         jScroll.setHorizontalScrollBar(sbH);
         this.setShape(new RoundRectangle2D.Double(0,0,getWidth(),getHeight(),20,20));
-        this.setResizable(true);
+        
+        
         
     }
 
@@ -47,13 +51,18 @@ public class texteditor1 extends javax.swing.JFrame {
         jScroll = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jToolBar1 = new javax.swing.JToolBar();
-        mBCustom1 = new com.mycompany.texteditor.customstuff.MBCustom();
+        JBItalic = new javax.swing.JButton();
+        jBBold = new javax.swing.JButton();
+        jBSt = new javax.swing.JButton();
+        jBUl = new javax.swing.JButton();
+        mBCustom1 = new com.group6.texteditor.customstuff.MBCustom();
         jMenu4 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         miFSave1 = new javax.swing.JMenuItem();
         miFSaveAs1 = new javax.swing.JMenuItem();
         miFOpen1 = new javax.swing.JMenuItem();
         miFDelete1 = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("StickierNotes");
@@ -67,21 +76,89 @@ public class texteditor1 extends javax.swing.JFrame {
         jScroll.setBackground(new java.awt.Color(0, 0, 0));
         jScroll.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jScroll.setForeground(new java.awt.Color(255, 255, 255));
+        jScroll.setViewportBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         jScroll.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jTextArea1.setBackground(new java.awt.Color(102, 102, 102));
+        jTextArea1.setBackground(new java.awt.Color(51, 59, 66));
         jTextArea1.setColumns(20);
         jTextArea1.setForeground(new java.awt.Color(255, 255, 255));
         jTextArea1.setRows(5);
+        jTextArea1.setBorder(javax.swing.BorderFactory.createCompoundBorder());
         jScroll.setViewportView(jTextArea1);
 
-        jToolBar1.setFloatable(true);
+        jToolBar1.setBackground(new java.awt.Color(130, 142, 175));
+        jToolBar1.setFloatable(false);
+        jToolBar1.setBorderPainted(false);
+        jToolBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jToolBar1.setMaximumSize(new java.awt.Dimension(100000, 10));
         jToolBar1.setMinimumSize(new java.awt.Dimension(0, 0));
         jToolBar1.setName(""); // NOI18N
         jToolBar1.setPreferredSize(new java.awt.Dimension(234, 18));
+        jToolBar1.setRequestFocusEnabled(false);
 
+        JBItalic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/italic.png"))); // NOI18N
+        JBItalic.setToolTipText("Italicize...");
+        JBItalic.setBorderPainted(false);
+        JBItalic.setContentAreaFilled(false);
+        JBItalic.setFocusable(false);
+        JBItalic.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        JBItalic.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        JBItalic.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBItalicActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(JBItalic);
+
+        jBBold.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/bold.png"))); // NOI18N
+        jBBold.setToolTipText("Bold...");
+        jBBold.setBorderPainted(false);
+        jBBold.setContentAreaFilled(false);
+        jBBold.setFocusable(false);
+        jBBold.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jBBold.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jBBold.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBBoldActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jBBold);
+
+        jBSt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/strikethrough.png"))); // NOI18N
+        jBSt.setToolTipText("Strike...");
+        jBSt.setBorderPainted(false);
+        jBSt.setContentAreaFilled(false);
+        jBSt.setFocusable(false);
+        jBSt.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jBSt.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jBSt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBStActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jBSt);
+
+        jBUl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/underline.png"))); // NOI18N
+        jBUl.setToolTipText("Underline...");
+        jBUl.setContentAreaFilled(false);
+        jBUl.setDefaultCapable(true);
+        jBUl.setFocusable(false);
+        jBUl.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jBUl.setMargin(new java.awt.Insets(-10, 0, -10, 0));
+        jBUl.setMaximumSize(new java.awt.Dimension(30, 30));
+        jBUl.setMinimumSize(new java.awt.Dimension(5, 5));
+        jBUl.setPreferredSize(new java.awt.Dimension(20, 20));
+        jBUl.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jBUl.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBUlActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jBUl);
+
+        mBCustom1.setColor(new java.awt.Color(135, 141, 148));
         mBCustom1.setDoubleBuffered(true);
+        mBCustom1.setOpaque(true);
         mBCustom1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 mBCustom1MouseDragged(evt);
@@ -140,6 +217,13 @@ public class texteditor1 extends javax.swing.JFrame {
 
         mBCustom1.add(jMenu2);
 
+        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pinlight.png"))); // NOI18N
+        jMenu3.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pinlight.png"))); // NOI18N
+        jMenu3.setRequestFocusEnabled(false);
+        jMenu3.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pindark.png"))); // NOI18N
+        jMenu3.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pindark.png"))); // NOI18N
+        mBCustom1.add(jMenu3);
+
         setJMenuBar(mBCustom1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -152,11 +236,10 @@ public class texteditor1 extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
 
         pack();
@@ -187,6 +270,22 @@ public class texteditor1 extends javax.swing.JFrame {
     private void mBCustom1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mBCustom1MouseDragged
         setLocation(evt.getXOnScreen() - x, evt.getYOnScreen() - y);    
     }//GEN-LAST:event_mBCustom1MouseDragged
+
+    private void JBItalicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBItalicActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JBItalicActionPerformed
+
+    private void jBBoldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBoldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBBoldActionPerformed
+
+    private void jBStActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBStActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBStActionPerformed
+
+    private void jBUlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBUlActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBUlActionPerformed
 
     /**
      * @param args the command line arguments
@@ -224,15 +323,22 @@ public class texteditor1 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton JBItalic;
+    private javax.swing.JButton jBBold;
+    private javax.swing.JButton jBSt;
+    private javax.swing.JButton jBUl;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JScrollPane jScroll;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JToolBar jToolBar1;
-    private com.mycompany.texteditor.customstuff.MBCustom mBCustom1;
+    private com.group6.texteditor.customstuff.MBCustom mBCustom1;
     private javax.swing.JMenuItem miFDelete1;
     private javax.swing.JMenuItem miFOpen1;
     private javax.swing.JMenuItem miFSave1;
     private javax.swing.JMenuItem miFSaveAs1;
     // End of variables declaration//GEN-END:variables
+
+
 }
