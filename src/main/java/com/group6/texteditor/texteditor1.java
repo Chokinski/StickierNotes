@@ -22,19 +22,20 @@ import javax.swing.border.LineBorder;
 public class texteditor1 extends javax.swing.JFrame {
     public int x;
     public int y;
+    public boolean onTop = true;
+    public JFrame form = this;
     
     /**
      * Creates new form texteditor1
      */
     public texteditor1() {
-
         initComponents();
+        
         jScroll.setVerticalScrollBar(new SBCustom());
         SBCustom sbH = new SBCustom();
         sbH.setOrientation(JScrollBar.HORIZONTAL);
         jScroll.setHorizontalScrollBar(sbH);
-        this.setShape(new RoundRectangle2D.Double(0,0,getWidth(),getHeight(),20,20));
-        
+        form.setShape(new RoundRectangle2D.Double(0,0,getWidth(),getHeight(),20,20));
         
         
     }
@@ -141,7 +142,6 @@ public class texteditor1 extends javax.swing.JFrame {
         jBUl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/underline.png"))); // NOI18N
         jBUl.setToolTipText("Underline...");
         jBUl.setContentAreaFilled(false);
-        jBUl.setDefaultCapable(true);
         jBUl.setFocusable(false);
         jBUl.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jBUl.setMargin(new java.awt.Insets(-10, 0, -10, 0));
@@ -220,8 +220,15 @@ public class texteditor1 extends javax.swing.JFrame {
         jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pinlight.png"))); // NOI18N
         jMenu3.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pinlight.png"))); // NOI18N
         jMenu3.setRequestFocusEnabled(false);
-        jMenu3.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pindark.png"))); // NOI18N
-        jMenu3.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pindark.png"))); // NOI18N
+        jMenu3.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                jMenu3MenuSelected(evt);
+            }
+        });
         mBCustom1.add(jMenu3);
 
         setJMenuBar(mBCustom1);
@@ -286,6 +293,18 @@ public class texteditor1 extends javax.swing.JFrame {
     private void jBUlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBUlActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jBUlActionPerformed
+
+    private void jMenu3MenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jMenu3MenuSelected
+        if (onTop) {
+            form.setAlwaysOnTop(false);
+            onTop = false;
+        }
+        else {
+            form.setAlwaysOnTop(true);
+            onTop = true;
+        }
+        System.out.println("Pressed");
+    }//GEN-LAST:event_jMenu3MenuSelected
 
     /**
      * @param args the command line arguments
