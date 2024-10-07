@@ -5,21 +5,18 @@
 package com.group6.texteditor;
 
 import com.group6.texteditor.customstuff.*;
-import java.awt.Color;
-import java.awt.Dimension;
+
 import java.awt.geom.RoundRectangle2D;
 
 import javax.swing.JFrame;
 import javax.swing.JScrollBar;
-import javax.swing.UIManager;
-import javax.swing.border.LineBorder;
 
 
 /**
  *
  * @author Luiz Macedo
  */
-public class texteditor1 extends javax.swing.JFrame {
+public class texteditor1 extends JFrame {
     public int x;
     public int y;
     public boolean onTop = true;
@@ -36,7 +33,6 @@ public class texteditor1 extends javax.swing.JFrame {
         sbH.setOrientation(JScrollBar.HORIZONTAL);
         jScroll.setHorizontalScrollBar(sbH);
         form.setShape(new RoundRectangle2D.Double(0,0,getWidth(),getHeight(),20,20));
-        
         
     }
 
@@ -175,6 +171,11 @@ public class texteditor1 extends javax.swing.JFrame {
         jMenu4.setToolTipText("");
         jMenu4.setBorderPainted(false);
         jMenu4.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
+        jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu4MouseClicked(evt);
+            }
+        });
         mBCustom1.add(jMenu4);
 
         jMenu2.setMnemonic('F');
@@ -303,8 +304,11 @@ public class texteditor1 extends javax.swing.JFrame {
             form.setAlwaysOnTop(true);
             onTop = true;
         }
-        System.out.println("Pressed");
     }//GEN-LAST:event_jMenu3MenuSelected
+
+    private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
+    new texteditor1().setVisible(true);
+    }//GEN-LAST:event_jMenu4MouseClicked
 
     /**
      * @param args the command line arguments

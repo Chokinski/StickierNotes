@@ -82,7 +82,7 @@ public class ModernScroller extends BasicScrollBarUI {
         int y=rec.y;
         int w = rec.width;
         int h = rec.height;
-        if( scrollbar.getOrientation() == JScrollBar.VERTICAL){
+        if(scrollbar.getOrientation() == JScrollBar.VERTICAL){
             y+=8;
             h -=16;
             
