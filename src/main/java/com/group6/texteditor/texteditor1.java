@@ -5,23 +5,34 @@
 package com.group6.texteditor;
 
 import com.group6.texteditor.customstuff.*;
-
-import java.awt.geom.RoundRectangle2D;
-
 import javax.swing.JFrame;
+import java.awt.geom.RoundRectangle2D;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import javax.swing.JFileChooser;
+
+import javax.swing.JOptionPane;
 import javax.swing.JScrollBar;
 
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.UndoableEditEvent;
+import javax.swing.event.UndoableEditListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.nio.file.Files;
 
 /**
  *
- * @author Luiz Macedo
+ * @author Luiz Macedo, Aidan, Zach, Ohm
  */
-public class texteditor1 extends JFrame {
+public class texteditor1 extends JFrame implements UndoableEditListener, DocumentListener, ActionListener{
     public int x;
     public int y;
     public boolean onTop = true;
     public JFrame form = this;
-    
+    private JFileChooser fileChooser;
     /**
      * Creates new form texteditor1
      */
@@ -33,9 +44,73 @@ public class texteditor1 extends JFrame {
         sbH.setOrientation(JScrollBar.HORIZONTAL);
         jScroll.setHorizontalScrollBar(sbH);
         form.setShape(new RoundRectangle2D.Double(0,0,getWidth(),getHeight(),20,20));
-        
+        miFDelete1.addActionListener(this);
+        miFOpen1.addActionListener(this);
+        miFSave1.addActionListener(this);
+        miFSaveAs1.addActionListener(this);
     }
+    
+    public void actionPerformed(ActionEvent evt) {
+    String actionCommand = evt.getActionCommand();
 
+    if ("miFDelete1".equals(actionCommand)) {
+        deleteFile();
+    } else if ("miFOpen1".equals(actionCommand)) {
+        openFile();
+    } else if ("miFSave1".equals(actionCommand)) {
+        saveFile();
+    } else if ("miFSaveAs1".equals(actionCommand)) {
+        saveFileAs();
+    }
+}
+   private void openFile() {
+    int result = fileChooser.showOpenDialog(this);
+    if (result == JFileChooser.APPROVE_OPTION) {
+        File selectedFile = fileChooser.getSelectedFile();
+        try {
+            String content = Files.readString(selectedFile.toPath());
+            jTextArea1.setText(content);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Error reading file: " + ex.getMessage());
+        }
+    }
+}
+
+private void deleteFile() {
+    jTextArea1.setText("");
+    JOptionPane.showMessageDialog(this, "Content cleared successfully");
+}
+
+
+private void saveFile() {
+    int result = fileChooser.showSaveDialog(this);
+    if (result == JFileChooser.APPROVE_OPTION) {
+        File selectedFile = fileChooser.getSelectedFile();
+        try {
+            FileWriter writer = new FileWriter(selectedFile);
+            writer.write(jTextArea1.getText());
+            writer.close();
+            JOptionPane.showMessageDialog(this, "File saved successfully");
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Error saving file: " + ex.getMessage());
+        }
+    }
+}
+
+private void saveFileAs() {
+    int result = fileChooser.showSaveDialog(this);
+    if (result == JFileChooser.APPROVE_OPTION) {
+        File selectedFile = fileChooser.getSelectedFile();
+        try {
+            FileWriter writer = new FileWriter(selectedFile);
+            writer.write(jTextArea1.getText());
+            writer.close();
+            JOptionPane.showMessageDialog(this, "File saved successfully");
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Error saving file: " + ex.getMessage());
+        }
+    }
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -358,6 +433,26 @@ public class texteditor1 extends JFrame {
     private javax.swing.JMenuItem miFSave1;
     private javax.swing.JMenuItem miFSaveAs1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void undoableEditHappened(UndoableEditEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void insertUpdate(DocumentEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void removeUpdate(DocumentEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void changedUpdate(DocumentEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
 
 }
