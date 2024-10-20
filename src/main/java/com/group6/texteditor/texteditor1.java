@@ -22,6 +22,7 @@ import javax.swing.event.UndoableEditListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.nio.file.Files;
+import javax.swing.text.StyledEditorKit;
 
 /**
  *
@@ -69,7 +70,7 @@ public class texteditor1 extends JFrame implements UndoableEditListener, Documen
         File selectedFile = fileChooser.getSelectedFile();
         try {
             String content = Files.readString(selectedFile.toPath());
-            jTextArea1.setText(content);
+            jTextPane1.setText(content);
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, "Error reading file: " + ex.getMessage());
         }
@@ -77,7 +78,7 @@ public class texteditor1 extends JFrame implements UndoableEditListener, Documen
 }
 
 private void deleteFile() {
-    jTextArea1.setText("");
+    jTextPane1.setText("");
     JOptionPane.showMessageDialog(this, "Content cleared successfully");
 }
 
@@ -88,7 +89,7 @@ private void saveFile() {
         File selectedFile = fileChooser.getSelectedFile();
         try {
             FileWriter writer = new FileWriter(selectedFile);
-            writer.write(jTextArea1.getText());
+            writer.write(jTextPane1.getText());
             writer.close();
             JOptionPane.showMessageDialog(this, "File saved successfully");
         } catch (IOException ex) {
@@ -103,7 +104,7 @@ private void saveFileAs() {
         File selectedFile = fileChooser.getSelectedFile();
         try {
             FileWriter writer = new FileWriter(selectedFile);
-            writer.write(jTextArea1.getText());
+            writer.write(jTextPane1.getText());
             writer.close();
             JOptionPane.showMessageDialog(this, "File saved successfully");
         } catch (IOException ex) {
@@ -121,11 +122,10 @@ private void saveFileAs() {
     private void initComponents() {
 
         jScroll = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jTextPane1 = new javax.swing.JTextPane();
         jToolBar1 = new javax.swing.JToolBar();
         JBItalic = new javax.swing.JButton();
         jBBold = new javax.swing.JButton();
-        jBSt = new javax.swing.JButton();
         jBUl = new javax.swing.JButton();
         mBCustom1 = new com.group6.texteditor.customstuff.MBCustom();
         jMenu4 = new javax.swing.JMenu();
@@ -150,13 +150,7 @@ private void saveFileAs() {
         jScroll.setForeground(new java.awt.Color(255, 255, 255));
         jScroll.setViewportBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         jScroll.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-
-        jTextArea1.setBackground(new java.awt.Color(51, 59, 66));
-        jTextArea1.setColumns(20);
-        jTextArea1.setForeground(new java.awt.Color(255, 255, 255));
-        jTextArea1.setRows(5);
-        jTextArea1.setBorder(javax.swing.BorderFactory.createCompoundBorder());
-        jScroll.setViewportView(jTextArea1);
+        jScroll.setViewportView(jTextPane1);
 
         jToolBar1.setBackground(new java.awt.Color(130, 142, 175));
         jToolBar1.setFloatable(false);
@@ -195,20 +189,6 @@ private void saveFileAs() {
             }
         });
         jToolBar1.add(jBBold);
-
-        jBSt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/strikethrough.png"))); // NOI18N
-        jBSt.setToolTipText("Strike...");
-        jBSt.setBorderPainted(false);
-        jBSt.setContentAreaFilled(false);
-        jBSt.setFocusable(false);
-        jBSt.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jBSt.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jBSt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBStActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(jBSt);
 
         jBUl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/underline.png"))); // NOI18N
         jBUl.setToolTipText("Underline...");
@@ -351,19 +331,18 @@ private void saveFileAs() {
     }//GEN-LAST:event_mBCustom1MouseDragged
 
     private void JBItalicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBItalicActionPerformed
-        // TODO add your handling code here:
+        StyledEditorKit.ItalicAction italicAction = new StyledEditorKit.ItalicAction();
+    italicAction.actionPerformed(evt);
     }//GEN-LAST:event_JBItalicActionPerformed
 
     private void jBBoldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBoldActionPerformed
-        // TODO add your handling code here:
+        StyledEditorKit.BoldAction boldAction = new StyledEditorKit.BoldAction();
+    boldAction.actionPerformed(evt);
     }//GEN-LAST:event_jBBoldActionPerformed
 
-    private void jBStActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBStActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBStActionPerformed
-
     private void jBUlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBUlActionPerformed
-        // TODO add your handling code here:
+                StyledEditorKit.UnderlineAction underlineAction = new StyledEditorKit.UnderlineAction();
+    underlineAction.actionPerformed(evt);
     }//GEN-LAST:event_jBUlActionPerformed
 
     private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
@@ -419,13 +398,12 @@ private void saveFileAs() {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBItalic;
     private javax.swing.JButton jBBold;
-    private javax.swing.JButton jBSt;
     private javax.swing.JButton jBUl;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JScrollPane jScroll;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextPane jTextPane1;
     private javax.swing.JToolBar jToolBar1;
     private com.group6.texteditor.customstuff.MBCustom mBCustom1;
     private javax.swing.JMenuItem miFDelete1;
