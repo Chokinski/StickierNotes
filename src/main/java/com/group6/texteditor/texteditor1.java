@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package com.group6.texteditor;
 
 import com.group6.texteditor.customstuff.*;
@@ -11,17 +8,17 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import javax.swing.JFileChooser;
-
 import javax.swing.JOptionPane;
 import javax.swing.JScrollBar;
 
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.event.UndoableEditEvent;
 import javax.swing.event.UndoableEditListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.nio.file.Files;
+import javax.swing.event.UndoableEditEvent;
+import javax.swing.text.DefaultStyledDocument;
 import javax.swing.text.StyledEditorKit;
 
 /**
@@ -34,10 +31,12 @@ public class texteditor1 extends JFrame implements UndoableEditListener, Documen
     public boolean onTop = true;
     public JFrame form = this;
     private JFileChooser fileChooser;
+      private DefaultStyledDocument document;
+    private StyledEditorKit kit;
     /**
      * Creates new form texteditor1
      */
-    public texteditor1() {
+     public texteditor1() {
         initComponents();
         
         jScroll.setVerticalScrollBar(new SBCustom());
@@ -45,73 +44,58 @@ public class texteditor1 extends JFrame implements UndoableEditListener, Documen
         sbH.setOrientation(JScrollBar.HORIZONTAL);
         jScroll.setHorizontalScrollBar(sbH);
         form.setShape(new RoundRectangle2D.Double(0,0,getWidth(),getHeight(),20,20));
-        miFDelete1.addActionListener(this);
-        miFOpen1.addActionListener(this);
-        miFSave1.addActionListener(this);
-        miFSaveAs1.addActionListener(this);
+        
+        // Initialize fileChooser
+        fileChooser = new JFileChooser();
+        
+        // Configure fileChooser (optional)
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Text Files", "txt"));
+        
+         document = (DefaultStyledDocument) jTextPane1.getStyledDocument();
+        kit = new StyledEditorKit();
+       
+    miFOpen1.addActionListener(this);
+    miFSave1.addActionListener(this);
+   miFDelete1.addActionListener(this);
+    
+      
     }
     
+    
+    private void clearTextPane() {
+        jTextPane1.setText("");
+    }
+
+ 
+    // Method to perform delete action
+    private void deleteAction() {
+        clearTextPane();
+      
+    }
+
+    @Override
     public void actionPerformed(ActionEvent evt) {
-    String actionCommand = evt.getActionCommand();
+        String actionCommand = evt.getActionCommand();
 
-    if ("miFDelete1".equals(actionCommand)) {
-        deleteFile();
-    } else if ("miFOpen1".equals(actionCommand)) {
-        openFile();
-    } else if ("miFSave1".equals(actionCommand)) {
-        saveFile();
-    } else if ("miFSaveAs1".equals(actionCommand)) {
-        saveFileAs();
-    }
-}
-   private void openFile() {
-    int result = fileChooser.showOpenDialog(this);
-    if (result == JFileChooser.APPROVE_OPTION) {
-        File selectedFile = fileChooser.getSelectedFile();
-        try {
-            String content = Files.readString(selectedFile.toPath());
-            jTextPane1.setText(content);
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(this, "Error reading file: " + ex.getMessage());
+        switch (actionCommand) {
+            case "miFDelete1":
+                deleteAction();
+                break;
+            
+       
+            case "miFOpen1":
+                openFile();
+                break;
+            case "miFSave1":
+                saveFile();
+                break;
+            default:
+                // Handle other actions...
         }
     }
-}
 
-private void deleteFile() {
-    jTextPane1.setText("");
-    JOptionPane.showMessageDialog(this, "Content cleared successfully");
-}
-
-
-private void saveFile() {
-    int result = fileChooser.showSaveDialog(this);
-    if (result == JFileChooser.APPROVE_OPTION) {
-        File selectedFile = fileChooser.getSelectedFile();
-        try {
-            FileWriter writer = new FileWriter(selectedFile);
-            writer.write(jTextPane1.getText());
-            writer.close();
-            JOptionPane.showMessageDialog(this, "File saved successfully");
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(this, "Error saving file: " + ex.getMessage());
-        }
-    }
-}
-
-private void saveFileAs() {
-    int result = fileChooser.showSaveDialog(this);
-    if (result == JFileChooser.APPROVE_OPTION) {
-        File selectedFile = fileChooser.getSelectedFile();
-        try {
-            FileWriter writer = new FileWriter(selectedFile);
-            writer.write(jTextPane1.getText());
-            writer.close();
-            JOptionPane.showMessageDialog(this, "File saved successfully");
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(this, "Error saving file: " + ex.getMessage());
-        }
-    }
-}
+  
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -128,12 +112,11 @@ private void saveFileAs() {
         jBBold = new javax.swing.JButton();
         jBUl = new javax.swing.JButton();
         mBCustom1 = new com.group6.texteditor.customstuff.MBCustom();
-        jMenu4 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         miFSave1 = new javax.swing.JMenuItem();
-        miFSaveAs1 = new javax.swing.JMenuItem();
         miFOpen1 = new javax.swing.JMenuItem();
         miFDelete1 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -150,6 +133,11 @@ private void saveFileAs() {
         jScroll.setForeground(new java.awt.Color(255, 255, 255));
         jScroll.setViewportBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         jScroll.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        jTextPane1.setBackground(new java.awt.Color(102, 102, 102));
+        jTextPane1.setForeground(java.awt.Color.white);
+        jTextPane1.setDisabledTextColor(new java.awt.Color(255, 255, 255));
+        jTextPane1.setName("StickyNotes"); // NOI18N
         jScroll.setViewportView(jTextPane1);
 
         jToolBar1.setBackground(new java.awt.Color(130, 142, 175));
@@ -221,6 +209,41 @@ private void saveFileAs() {
             }
         });
 
+        jMenu2.setMnemonic('F');
+        jMenu2.setText("File");
+
+        miFSave1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jwebedit/icons/Save16.gif"))); // NOI18N
+        miFSave1.setMnemonic('S');
+        miFSave1.setText("Save");
+        miFSave1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miFSave1ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(miFSave1);
+
+        miFOpen1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jwebedit/icons/Open16.gif"))); // NOI18N
+        miFOpen1.setMnemonic('O');
+        miFOpen1.setText("Open");
+        miFOpen1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miFOpen1ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(miFOpen1);
+
+        miFDelete1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jwebedit/icons/Delete16.gif"))); // NOI18N
+        miFDelete1.setMnemonic('D');
+        miFDelete1.setText("Delete");
+        miFDelete1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miFDelete1ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(miFDelete1);
+
+        mBCustom1.add(jMenu2);
+
         jMenu4.setBackground(new java.awt.Color(153, 153, 153));
         jMenu4.setText("+");
         jMenu4.setToolTipText("");
@@ -232,46 +255,6 @@ private void saveFileAs() {
             }
         });
         mBCustom1.add(jMenu4);
-
-        jMenu2.setMnemonic('F');
-        jMenu2.setText("File");
-
-        miFSave1.setMnemonic('S');
-        miFSave1.setText("Save");
-        miFSave1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miFSave1ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(miFSave1);
-
-        miFSaveAs1.setText("Save As");
-        miFSaveAs1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miFSaveAs1ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(miFSaveAs1);
-
-        miFOpen1.setMnemonic('O');
-        miFOpen1.setText("Open");
-        miFOpen1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miFOpen1ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(miFOpen1);
-
-        miFDelete1.setMnemonic('D');
-        miFDelete1.setText("Delete");
-        miFDelete1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miFDelete1ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(miFDelete1);
-
-        mBCustom1.add(jMenu2);
 
         jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pinlight.png"))); // NOI18N
         jMenu3.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pinlight.png"))); // NOI18N
@@ -295,7 +278,7 @@ private void saveFileAs() {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
+                .addComponent(jScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
@@ -306,19 +289,15 @@ private void saveFileAs() {
     }// </editor-fold>//GEN-END:initComponents
 
     private void miFSave1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miFSave1ActionPerformed
-        // TODO add your handling code here:
+         saveFile();
     }//GEN-LAST:event_miFSave1ActionPerformed
 
-    private void miFSaveAs1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miFSaveAs1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_miFSaveAs1ActionPerformed
-
     private void miFOpen1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miFOpen1ActionPerformed
-        // TODO add your handling code here:
+         openFile();
     }//GEN-LAST:event_miFOpen1ActionPerformed
 
     private void miFDelete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miFDelete1ActionPerformed
-        // TODO add your handling code here:
+      deleteAction();
     }//GEN-LAST:event_miFDelete1ActionPerformed
 
     private void mBCustom1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mBCustom1MousePressed
@@ -359,10 +338,43 @@ private void saveFileAs() {
             onTop = true;
         }
     }//GEN-LAST:event_jMenu3MouseClicked
+   
+    private void openFile() {
+    int result = fileChooser.showOpenDialog(this);
+    if (result == JFileChooser.APPROVE_OPTION) {
+        File selectedFile = fileChooser.getSelectedFile();
+        try {
+            String content = Files.readString(selectedFile.toPath());
+            jTextPane1.setText(content);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Error reading file: " + ex.getMessage());
+        }
+    }
+}
 
-    /**
-     * @param args the command line arguments
-     */
+private void deleteFile() {
+            clearTextPane();
+
+    JOptionPane.showMessageDialog(this, "Content cleared successfully");
+}
+
+private void saveFile() {
+    int result = fileChooser.showSaveDialog(this);
+    if (result == JFileChooser.APPROVE_OPTION) {
+        File selectedFile = fileChooser.getSelectedFile();
+        try {
+            FileWriter writer = new FileWriter(selectedFile);
+            writer.write(jTextPane1.getText());
+            writer.close();
+            JOptionPane.showMessageDialog(this, "File saved successfully");
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Error saving file: " + ex.getMessage());
+        }
+    }
+}
+
+
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -409,13 +421,10 @@ private void saveFileAs() {
     private javax.swing.JMenuItem miFDelete1;
     private javax.swing.JMenuItem miFOpen1;
     private javax.swing.JMenuItem miFSave1;
-    private javax.swing.JMenuItem miFSaveAs1;
     // End of variables declaration//GEN-END:variables
+ 
+ 
 
-    @Override
-    public void undoableEditHappened(UndoableEditEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
     @Override
     public void insertUpdate(DocumentEvent e) {
@@ -429,6 +438,11 @@ private void saveFileAs() {
 
     @Override
     public void changedUpdate(DocumentEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void undoableEditHappened(UndoableEditEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
