@@ -2,8 +2,10 @@
   
 # StickierNotes
 
-![StickierNotes Logo](pinned-svgrepo-com.ico) <!-- Replace with your logo path -->
-Developed by the 4 headed goat--    
+![StickierNotes Logo](pinned-svgrepo-com.ico)  
+
+Developed by the 4 headed goat
+  
 Luiz, Om, Zach, and Aidan.  
 
 StickierNotes is a lightweight note-taking application inspired by Microsoft's Sticky Notes. 
