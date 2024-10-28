@@ -1,4 +1,5 @@
-<div align="center">
+<div align="center">  
+  
 # StickierNotes
 
 ![StickierNotes Logo](pinned-svgrepo-com.ico) <!-- Replace with your logo path -->
