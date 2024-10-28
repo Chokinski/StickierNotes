@@ -1,3 +1,4 @@
+<div align="center">
 # StickierNotes
 
 ![StickierNotes Logo](pinned-svgrepo-com.ico) <!-- Replace with your logo path -->
@@ -15,3 +16,4 @@ It allows users to create, manage, and organize multiple sticky notes seamlessly
 ## Installation
 To install, clone the repository, or check releases and download the StickierNotes.exe file.
 Run the file, and you're good. No extra steps or fine print.
+</div>
