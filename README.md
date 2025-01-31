@@ -4,9 +4,8 @@
 
 ![StickierNotes Logo](pinned-svgrepo-com.ico)  
 
-Developed by the 4 headed goat
-  
-Luiz, Om, Zach, and Aidan.  
+
+Developed by CT State students Luiz, Om, Zach, and Aidan.  
 
 StickierNotes is a lightweight note-taking application inspired by Microsoft's Sticky Notes. 
 It allows users to create, manage, and organize multiple sticky notes seamlessly on their desktop.  
